@@ -9,21 +9,56 @@
 
 int main(void)
 {
+#if DBG == 2
 	FILE *fp;
 	fp=fopen("result.txt","w");
+#endif
+	FILE *rfp;
+	char *s;
+	char c;
+	int n;
+	int i;
 //	char *s="2147483647";
 //	char *s="4294967294";
 	int a;
 	int b=INT_MAX;
 //	int test=1;
-	char *s="1";
 	int *x;
+
+	if((rfp=fopen("start.txt","r"))==NULL){
+		printf("FILE NOT FOUND");
+		s="1";
+		a=0;
+	}else{
+		n=0;
+		fscanf(rfp,"%d\n",&a);
+		while(fscanf(rfp,"%c",&c)!=EOF){
+			n++;
+		}
+		s=(char *)calloc(n,sizeof(char));
+
+		fseek(rfp,0,SEEK_SET);
+	
+		fscanf(rfp,"%d\n",&a);
+		i=0;
+		while(fscanf(rfp,"%c",&c)!=EOF){
+			s[i]=c;
+			i++;
+		}
+		
+		fclose(rfp);
+//		printf("a%dn",a);
+//		printf("%s",s);
+//		printf("ccc%c",s[0]);
+	}
 
 	printf("int  max %ld\n",INT_MAX);
 	printf("long max %ld\n",LONG_MAX);
 
 	//printf("int %d+%d = %d\n",test,test,test+test);
 	x=(int *)array_to_int_from_char(x,s);
+
+	free(s);
 
 //	for(a=0;a<b;a++){
 //		printf("%d:\t",a);
@@ -60,7 +95,7 @@ int main(void)
 //	//	if(test<0) return 1;
 //	}
 //
-	for(a=0;a<b;a++){
+	for(;a<b;a++){
 		int i;
 		int flag=0;
 
@@ -109,6 +144,10 @@ int main(void)
 //		if(x[i]!=0) flag=1;
 //		if(flag==1) printf("%d",x[i]);
 //	}
+
+#if DBG == 2
+	fclose(fp);
+#endif
 
 	return 0;
 }

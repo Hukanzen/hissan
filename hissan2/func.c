@@ -9,8 +9,13 @@ int *array_to_int_from_char(int *x,char *s)
 //	reset(x,n);
 	for(i=n-1;i>=0;i--){
 		x[i]=s[i]-'0';
-//		printf("x%d\n",x[i]);
+//		printf("i=%d\n",i);
+	
 	}
+	//i++;
+	//printf("i%dc%c\n",i,s[i]);
+	//printf("x%d\n",x[i]);
+
 	x[n]=-1;
 
 
