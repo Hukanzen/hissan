@@ -1,6 +1,6 @@
 use POSIX 'strftime';
 
-$i=0;
+my $i=0;
 
 my $now = strftime "%Y%m%d_%H%M%S", localtime;
 my $file="_".$now."_".$i."result.txt";
