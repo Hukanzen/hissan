@@ -3,6 +3,8 @@
 
 int main(void)
 {
+	clock_t start=clock(); /* プログラム開始時の時刻 */
+	clock_t end;   /* プログラム終了時の時刻 */
 #if RFILE == 1
 	FILE *rfp;
 #endif
@@ -16,9 +18,11 @@ int main(void)
 	int i;         /* 予約 */
 	int a;         /* 回数カウント*/
 //	int b=INT_MAX; /* 最大値 */
-	int b=5;
+	int b=B_MAX;
 	int *x;        /* 演算用ポインタ */
 	int flag;      /* 0消し用flag */
+	int st;
+	int err=0;
 
 #if RFILE == 0
 	a=0;
@@ -56,40 +60,58 @@ int main(void)
 //	free(s);
 
 	for(;a<b;a++){
-		flag=0;
+		if(!fork()){
+			flag=0;
 
 #if WFILE == 0
-		printf("%d:\t",a);
+			printf("%d:\t",a);
 #elif WFILE == 1
-		fprintf(fp,"%d:\t",a);
+			fprintf(fp,"%d:\t",a);
 #endif
 
 #if DBG == 0
-		for(i=0;i<(cnt_keta(x));i++){
-			if(x[i]!=0) flag=1;
+			//for(i=0;i<(cnt_keta(x));i++){
+			for(i=(cnt_keta(x)-1);i>=0;i--){
+				if(x[i]!=0) flag=1;
 #elif DBG == 1
-		for(i=0;i<(cnt_keta(x))+1;i++){
-			printf("%d",x[i]);
+			//for(i=0;i<(cnt_keta(x))+1;i++){
+			for(i=(cnt_keta(x));i>=0;i--){
+				printf("%d",x[i]);
 #endif
-
 #if WFILE == 0
-			if(flag==1) printf("%d",x[i]);
+				if(flag==1) printf("%d",x[i]);
 #elif WFILE == 1
-			if(flag==1) fprintf(fp,"%d",x[i]);
+				if(flag==1) fprintf(fp,"%d",x[i]);
 #endif
-		}
+				if(x[i]<0){
+					err=1;
+					return err;
+				}
+
+			}
 	
 #if WFILE == 0
-		printf("\n");
+			printf("\n");
 #elif WFILE == 1
-		fprintf(fp,"\n");
+			fprintf(fp,"\n");
 #endif
-		x=(int *)my_add(x,cnt_keta(x));
+			exit(0);
+
+		}else{
+			x=(int *)my_add(x,cnt_keta(x));
+			wait(&st);
+			if(err!=0) return err;
+		}
 	}
 
+	end=clock();
+	printf("計算終了 所要時間:%lf[s]\n",(double)end-start/1000);
+
 #if WFILE == 1
+	fprintf(fp,"計算終了 所要時間:%lf[s]\n",(double)end-start/1000);
 	fclose(fp);
 #endif
+	
 
 	return 0;
 }

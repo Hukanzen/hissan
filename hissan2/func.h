@@ -4,6 +4,9 @@
 #include<string.h>
 //#include<math.h>
 #include<limits.h>
+#include<time.h>
+#include<unistd.h>
+#include<sys/wait.h>
 
 
 #define DBG 0
@@ -16,10 +19,12 @@
    RFILE 1 load start.txt
 */
 
-#define WFILE 0
+#define WFILE 1
 /* WFILE 0 printf
    WFILE 1 fprintf
 */
+
+#define B_MAX (10*10000)
 /* 多重インクルード防止 */
 #ifdef _FUNC_H_
 #define _FUNC_H_

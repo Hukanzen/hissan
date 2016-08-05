@@ -7,9 +7,10 @@ int *array_to_int_from_char(int *x,char *s)
 
 	x=(int *)calloc(n+1,sizeof(int));
 
-	for(i=0;i<n+1;i++){
-		x[i]=s[i]-'0';
+	for(i=0;i<n;i++){
+		x[i]=s[n-i-1]-'0';
 //		printf("i=%d\n",i);
+//		printf("x[i]=%d\n",x[i]);
 	}
 
 	x[n]=-1;
@@ -53,33 +54,37 @@ int *my_add(int *x,int keta/* 使える数字のみが入っている桁数.-1�
 	C=(int *)calloc(keta+2,sizeof(int));
 	reset(C,keta+2);
 	C[keta+1]=-1;
-//	if(A[0]==0){
-//		c_yoso=keta+1; /*keta + "-1" */
-//		c_keta=keta;
-//	}else{
-//		c_yoso=keta+2; /*keta + "-1" + 繰り上がり */
-//		c_keta=keta+1;
+////	if(A[0]==0){
+////		c_yoso=keta+1; /*keta + "-1" */
+////		c_keta=keta;
+////	}else{
+////		c_yoso=keta+2; /*keta + "-1" + 繰り上がり */
+////		c_keta=keta+1;
+////	}
+////
+////	printf("c_keta=%d\n",c_keta);
+////	printf("c_yoso=%d\n",c_yoso);
+////
+////	C=(int *)calloc(c_yoso+1,sizeof(int));
+////	reset(C,c_yoso);
+////
+////	C[c_yoso]=-1;
+//
+//	for(i=keta-1;i>=0;i--){
+//		C[i+1]+=(A[i]+A[i])%10;
+//		kuri=(A[i]+A[i])/10;
+//		C[i+1-1]+=kuri;
 //	}
 //
-//	printf("c_keta=%d\n",c_keta);
-//	printf("c_yoso=%d\n",c_yoso);
-//
-//	C=(int *)calloc(c_yoso+1,sizeof(int));
-//	reset(C,c_yoso);
-//
-//	C[c_yoso]=-1;
-
-	for(i=keta-1;i>=0;i--){
-		C[i+1]+=(A[i]+A[i])%10;
-		kuri=(A[i]+A[i])/10;
-		C[i+1-1]+=kuri;
+	for(i=0;A[i]!=-1;i++){
+		C[i]+=(A[i]+A[i])%10;
+		C[i+1]+=(A[i]+A[i])/10;
 	}
-
-//	for(i=0;i<keta;i++){
-//		C[c_keta-i]+=(A[keta-i]+A[keta-i])%10;
-//		kuri=(A[keta-i]+A[keta-i])/10;
-//		C[c_keta-i-1]+=kuri;
-//	}
+////	for(i=0;i<keta;i++){
+////		C[c_keta-i]+=(A[keta-i]+A[keta-i])%10;
+////		kuri=(A[keta-i]+A[keta-i])/10;
+////		C[c_keta-i-1]+=kuri;
+////	}
 
 	free(A);
 
