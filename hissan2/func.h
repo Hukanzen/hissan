@@ -24,7 +24,8 @@
    WFILE 1 fprintf
 */
 
-#define B_MAX (10*10000)
+//#define B_MAX (10*10000)
+#define B_MAX (INT_MAX)
 /* 多重インクルード防止 */
 #ifdef _FUNC_H_
 #define _FUNC_H_

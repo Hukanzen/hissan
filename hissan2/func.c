@@ -4,16 +4,27 @@ int *array_to_int_from_char(int *x,char *s)
 {
 	int i=0;
 	int n=strlen(s);
-
+	
 	x=(int *)calloc(n+1,sizeof(int));
+//	int *y=(int *)calloc(n+1,sizeof(int));
 
-	for(i=0;i<n;i++){
-		x[i]=s[n-i-1]-'0';
-//		printf("i=%d\n",i);
-//		printf("x[i]=%d\n",x[i]);
+	//for(i=0;i<n;i++){
+	//	x[i]=s[n-i-2]-'0';
+//	//	printf("i=%d\n",i);
+//	//	printf("x[i]=%d\n",x[i]);
+	//}
+
+	for(i=0;s[i]!='\0';i++){
+		x[n-i-1]=s[i]-'0';
 	}
 
 	x[n]=-1;
+	//y[n]=-1;
+	//for(i=0;y[i]!=-1;i++){
+	//for(i=0;i<=n;i++){
+	//	printf("%d",x[i]);
+	//}
+	//printf("%d",y[n]);
 
 	return x;
 }
@@ -45,9 +56,9 @@ int *my_add(int *x,int keta/* 使える数字のみが入っている桁数.-1�
 	int *A;
 //	int *B;
 	int *C;
-	int kuri;
-	int c_yoso; /* int型配列Cの要素数 */
-	int c_keta; /* int型配列Cの使える桁数 */
+//	int kuri;
+//	int c_yoso; /* int型配列Cの要素数 */
+//	int c_keta; /* int型配列Cの使える桁数 */
 
 	A=x;
 

@@ -12,13 +12,14 @@ int main(void)
 	FILE *fp;
 	fp=fopen("result.txt","w");
 #endif
+	///FILE *vfp;
+	///vfp=fopen("vr.txt","w");
 	char *s;       /* 初期値 */
-	char c;	       /* 予約 */
-	int n;         /* 予約 */
+//	char c;	       /* 予約 */
+//	int n;         /* 予約 */
 	int i;         /* 予約 */
 	int a;         /* 回数カウント*/
-//	int b=INT_MAX; /* 最大値 */
-	int b=B_MAX;
+	int b=B_MAX; /* 最大値 */
 	int *x;        /* 演算用ポインタ */
 	int flag;      /* 0消し用flag */
 	int st;
@@ -43,19 +44,27 @@ int main(void)
 	
 		i=0;
 		fscanf(rfp,"%d\n",&a);
-		while(fscanf(rfp,"%c",&c)!=EOF){
-			s[i]=c;
-			i++;
-		}
+		//while(fscanf(rfp,"%c",&c)!=EOF){
+		//	s[i]=c;
+		//	i++;
+		//}
+		fscanf(rfp,"%s",s);
 		
 		fclose(rfp);
 	}
 #endif
 
-	printf("int  max %d\n",INT_MAX);
-	printf("long max %ld\n",LONG_MAX);
-
+//	printf("int  max %d\n",INT_MAX);
+//	printf("long max %ld\n",LONG_MAX);
+//
 	x=(int *)array_to_int_from_char(x,s);
+
+	//printf("%s",s);
+//	for(i=0;x[i]!=-1;i++){
+//		printf("%d",x[i]);
+//	}
+//		printf("%d",x[i+1]);
+//return 0;	
 
 //	free(s);
 
@@ -83,12 +92,14 @@ int main(void)
 #elif WFILE == 1
 				if(flag==1) fprintf(fp,"%d",x[i]);
 #endif
+
 				if(x[i]<0){
 					err=1;
 					return err;
 				}
 
 			}
+
 	
 #if WFILE == 0
 			printf("\n");
